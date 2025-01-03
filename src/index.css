@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+:root {
+  /* COLORS */
+  /* color mode === hsl(hue, saturation, lightness) */
+  --Background-color: #fafafa;
+  --line-color: #e3e4f1;
+  --CompletedText-color: #d1d2da;
+  --Text-color: #9495a5;
+  --TodoText-color: #494c6b;
+  --inputText-color: #393a4b;
+  --white: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", serif;
+}
+
+.App {
+  margin: 0 auto;
+  max-width: 540px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 15px;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.todo-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.todo-form button {
+  position: absolute;
+  left: 1rem;
+  transform: translate(50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--white);
+  border-radius: 50%;
+  border: 1px solid #e3e4f1;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  background-color: var(--white);
+  color: var(--inputText-color);
+  border-radius: 5px;
+  padding: 0 4rem;
+  box-shadow: 30px 50px -15px hsla(237, 20%, 80%, 0.5);
+}
+
+input[type="text"]::placeholder {
+  color: var(--Text-color);
+}
+
+.todo-list {
+  width: 100%;
+  background-color: var(--white);
+  margin-top: 1.5rem;
+  border-radius: 5px;
+}
+
+.todos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.check-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--white);
+  border-radius: 50%;
+  border: 1px solid #e3e4f1;
+  cursor: pointer;
+}
+
+.todo-text {
+  font-size: 18px;
+  color: var(--TodoText-color);
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--line-color);
+}
+
+.todo-control {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  font-size: 14px;
+  color: var(--Text-color);
+}
+
+.filter-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-buttons button {
+  all: unset;
+  /* font-size: 14px; */
+  font-weight: bold;
+  /* color: var(--Text-color); */
+}
+
+@media (max-width: 500px) {
+  body {
+    background: var(--Background-color) url(/public/images/bg-mobile-light.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 3rem 1.5rem;
+  }
+
+  input {
+    height: 48px;
+  }
+}
+
+@media (min-width: 500px) {
+  body {
+    background: var(--Background-color) url(/public/images/bg-desktop-light.jpg);
+    background-repeat: no-repeat;
+    margin: 5rem 1.5rem;
+  }
+
+  input {
+    height: 64px;
+  }
+}

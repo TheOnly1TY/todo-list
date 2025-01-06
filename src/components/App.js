@@ -76,6 +76,7 @@ function TodoItem({ todoItem, todoList, onTodoList }) {
         className="todos"
         onMouseEnter={() => setShowIcon(true)}
         onMouseLeave={() => setShowIcon(false)}
+        draggable="true"
       >
         <div className="todo-item">
           <figure

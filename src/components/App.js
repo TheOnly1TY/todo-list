@@ -1,83 +1,110 @@
 import { useState } from "react";
+
 import { EmptyTodoList } from "./EmptyTodoList";
 import { Header } from "./Header";
+import { Title } from "./Title";
+import { ThemeIcon } from "./ThemeIcon";
 import { TodoForm } from "./TodoForm";
+import { TodoList } from "./TodoList";
+import { NoOfItemsLeft } from "./NoOfItemsLeft";
+import { ClearCompleted } from "./ClearCompleted";
 
 export default function App() {
   const [todoText, setTodoText] = useState("");
-  const [todo, setTodo] = useState([]);
+  const [todoList, setTodoList] = useState([]);
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (!todoText) return;
     const addTodo = { text: todoText, checked: false };
-    setTodo((todo) => [...todo, addTodo]);
+    setTodoList((todo) => [...todo, addTodo]);
     setTodoText("");
   };
+
   return (
     <div className="App">
-      <Header />
+      <Header>
+        <Title />
+        <ThemeIcon />
+      </Header>
       <TodoForm
         handleAddTodo={handleAddTodo}
         todoText={todoText}
         setTodoText={setTodoText}
       />
       <TodoList>
-        {todo.length === 0 ? (
+        {todoList.length === 0 ? (
           <EmptyTodoList />
         ) : (
-          todo.map((todo, id) => (
+          todoList.map((todoItem, id) => (
             <TodoItem
-              todo={todo}
-              onTodo={setTodo}
-              handleRemoveTodo={handleRemoveTodo}
+              todoItem={todoItem}
               key={id}
+              todoList={todoList}
+              onTodoList={setTodoList}
             />
           ))
         )}
 
         <div className="todo-control">
-          <NoOfItemsLeft />
+          <NoOfItemsLeft todoList={todoList} />
           <FilterButtons className="desktop" />
-          <ClearCompleted />
+          <ClearCompleted onTodoList={setTodoList} />
         </div>
       </TodoList>
-      <FilterButtons className="mobile" />
+      <FilterButtons todoList={todoList} className="mobile" />
     </div>
   );
 }
 
-function TodoList({ children }) {
-  return <div className="todo-list">{children}</div>;
-}
-function NoOfItemsLeft() {
-  return <p>5 items left</p>;
-}
+function TodoItem({ todoItem, todoList, onTodoList }) {
+  const [showIcon, setShowIcon] = useState(false);
+  const handleChecked = (todoItem) => {
+    onTodoList(
+      todoList.map((todo) =>
+        todo === todoItem ? { ...todo, checked: !todo.checked } : todo
+      )
+    );
+  };
 
-function ClearCompleted() {
-  return <button className="clear-list">Clear Completed</button>;
-}
+  const handleRemoveTodo = (todoItem) => {
+    onTodoList(todoList.filter((todo) => todoItem.text !== todo.text));
+  };
 
-function TodoItem({ todo, handleRemoveTodo }) {
-  const handleChecked = () => {};
   return (
     <>
-      <div className="todos">
+      <div
+        className="todos"
+        onMouseEnter={() => setShowIcon(true)}
+        onMouseLeave={() => setShowIcon(false)}
+      >
         <div className="todo-item">
-          <figure className="check-icon" onClick={handleChecked}>
-            <img src="images/icon-check.svg" alt="check icon" />
+          <figure
+            className={`check-icon ${todoItem.checked && "checked-background"}`}
+            onClick={() => handleChecked(todoItem)}
+          >
+            {todoItem.checked && (
+              <img src="images/icon-check.svg" alt="check icon" />
+            )}
           </figure>
-          <p className="todo-text">{todo.text}</p>
+          <p className={`todo-text ${todoItem.checked && "checked-text"}`}>
+            {todoItem.text}
+          </p>
         </div>
-        <figure className="cancel-icon" onClick={handleRemoveTodo}>
-          <img src="images/icon-cross.svg" alt="cancel icon" />
-        </figure>
+        {showIcon && (
+          <figure
+            className="cancel-icon"
+            onClick={() => handleRemoveTodo(todoItem)}
+          >
+            <img src="images/icon-cross.svg" alt="cancel icon" />
+          </figure>
+        )}
       </div>
       <div className="line"></div>
     </>
   );
 }
 
-function FilterButtons({ className }) {
+function FilterButtons({ className, todoList }) {
   return (
     <div className={`filter-buttons ${className}`}>
       <button>All</button>

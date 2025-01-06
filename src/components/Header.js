@@ -1,11 +1,6 @@
-import { ThemeIcon } from "./ThemeIcon.js";
-import { Title } from "./Title";
+// import { ThemeIcon } from "./ThemeIcon";
+// import { Title } from "./Title";
 
-export function Header() {
-  return (
-    <header>
-      <Title />
-      <ThemeIcon />
-    </header>
-  );
+export function Header({ children }) {
+  return <header>{children}</header>;
 }

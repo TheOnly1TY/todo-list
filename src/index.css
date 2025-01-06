@@ -3,6 +3,7 @@
 :root {
   /* COLORS */
   /* color mode === hsl(hue, saturation, lightness) */
+  --bright-blue: #3a7cfd;
   --Background-color: #fafafa;
   --line-color: #e3e4f1;
   --CompletedText-color: #d1d2da;
@@ -13,6 +14,17 @@
 
   --shadow: 35px 50px -15px hsla(237, 20%, 80%, 0.5);
 }
+
+/* --bright-blue: #3a7cfd;
+--Background-color: #fafafa;
+--line-color: #e3e4f1;
+--CompletedText-color: #d1d2da;
+--Text-color: #9495a5;
+--TodoText-color: #494c6b;
+--inputText-color: #393a4b;
+--white: #fff;
+
+--shadow: 35px 50px -15px hsla(237, 20%, 80%, 0.5); */
 
 * {
   margin: 0;
@@ -87,7 +99,7 @@ input[type="text"]::placeholder {
   align-items: center;
 }
 
-.empty-todo{
+.empty-todo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,11 +108,11 @@ input[type="text"]::placeholder {
   padding: 2rem 0;
 }
 
-.empty-todo img{
+.empty-todo img {
   width: 5rem;
 }
 
-.empty-todo p{
+.empty-todo p {
   font-size: 18px;
   color: var(--TodoText-color);
 }
@@ -112,13 +124,21 @@ input[type="text"]::placeholder {
 }
 
 .check-icon {
+  display: flex;
   flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
   background-color: var(--white);
   border-radius: 50%;
   border: 1px solid #e3e4f1;
   cursor: pointer;
+}
+
+.checked-background {
+  background: linear-gradient(0deg, #55ddff, #c058f3);
+  border: none;
 }
 
 .todo-text {
@@ -128,7 +148,20 @@ input[type="text"]::placeholder {
   word-break: break-all;
   padding: 0 1rem;
 }
+.checked-text {
+  color: var(--CompletedText-color);
+  text-decoration: line-through;
+}
 
+.cancel-icon {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+.cancel-icon img {
+  display: grid;
+  place-content: center;
+}
 
 .line {
   width: 100%;
@@ -153,12 +186,23 @@ input[type="text"]::placeholder {
 .filter-buttons button {
   all: unset;
   font-weight: bold;
-  cursor: pointer
+  cursor: pointer;
 }
 
-.clear-list{
+.filter-buttons button.active {
+  color: var(--bright-blue);
+}
+
+.filter-buttons button:hover {
+  color: var(--TodoText-color);
+}
+
+.clear-list {
   all: unset;
-  cursor: pointer
+  cursor: pointer;
+}
+.clear-list:hover {
+  color: var(--TodoText-color);
 }
 
 @media (max-width: 500px) {
@@ -177,9 +221,9 @@ input[type="text"]::placeholder {
     padding: 0 3.5rem;
   }
   .todos {
-    padding: 1rem ;
+    padding: 1rem;
   }
-  .mobile{
+  .mobile {
     justify-content: center;
     height: 3rem;
     font-size: 14px;
@@ -188,7 +232,7 @@ input[type="text"]::placeholder {
     border-radius: 5px;
     box-shadow: var(--shadow);
   }
-  .desktop{
+  .desktop {
     display: none;
   }
 }
@@ -208,9 +252,9 @@ input[type="text"]::placeholder {
     padding: 0 4rem;
   }
   .todos {
-    padding: 1.5rem ;
+    padding: 1.5rem;
   }
-  .mobile{
+  .mobile {
     display: none;
   }
 }

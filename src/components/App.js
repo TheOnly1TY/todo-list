@@ -1,24 +1,38 @@
 import { useState } from "react";
 
-import { EmptyTodoList } from "./EmptyTodoList";
 import { Header } from "./Header";
 import { Title } from "./Title";
 import { ThemeIcon } from "./ThemeIcon";
 import { TodoForm } from "./TodoForm";
+import { EmptyTodoList } from "./EmptyTodoList";
 import { TodoList } from "./TodoList";
 import { NoOfItemsLeft } from "./NoOfItemsLeft";
+import { FilterButtons } from "./FilterButtons";
 import { ClearCompleted } from "./ClearCompleted";
 
 export default function App() {
   const [todoText, setTodoText] = useState("");
   const [todoList, setTodoList] = useState([]);
+  const [filter, setFilter] = useState("All");
+
   const handleAddTodo = (e) => {
     e.preventDefault();
     if (!todoText) return;
-    const addTodo = { text: todoText, checked: false };
+
+    const addTodo = {
+      id: new Date().getTime(),
+      text: todoText,
+      checked: false,
+    };
     setTodoList((todo) => [...todo, addTodo]);
     setTodoText("");
   };
+
+  const filteredTodoList = todoList.filter((todo) => {
+    if (filter === "Active") return !todo.checked;
+    if (filter === "Completed") return todo.checked;
+    return true;
+  });
 
   return (
     <div className="App">
@@ -32,13 +46,13 @@ export default function App() {
         setTodoText={setTodoText}
       />
       <TodoList>
-        {todoList.length === 0 ? (
+        {filteredTodoList.length === 0 ? (
           <EmptyTodoList />
         ) : (
-          todoList.map((todoItem, id) => (
+          filteredTodoList.map((todoItem, id) => (
             <TodoItem
               todoItem={todoItem}
-              key={id}
+              key={todoItem.id}
               todoList={todoList}
               onTodoList={setTodoList}
             />
@@ -47,18 +61,26 @@ export default function App() {
 
         <div className="todo-control">
           <NoOfItemsLeft todoList={todoList} />
-          <FilterButtons className="desktop" />
+          <FilterButtons
+            screenSize="desktop"
+            filter={filter}
+            setFilter={setFilter}
+          />
           <ClearCompleted onTodoList={setTodoList} />
         </div>
       </TodoList>
-      <FilterButtons todoList={todoList} className="mobile" />
+      <FilterButtons
+        screenSize="mobile"
+        filter={filter}
+        setFilter={setFilter}
+      />
     </div>
   );
 }
 
 function TodoItem({ todoItem, todoList, onTodoList }) {
-  const [showIcon, setShowIcon] = useState(false);
-  const handleChecked = (todoItem) => {
+  const [showCancelIcon, setShowCancelIcon] = useState(false);
+  const handleToggleTodo = (todoItem) => {
     onTodoList(
       todoList.map((todo) =>
         todo === todoItem ? { ...todo, checked: !todo.checked } : todo
@@ -74,14 +96,13 @@ function TodoItem({ todoItem, todoList, onTodoList }) {
     <>
       <div
         className="todos"
-        onMouseEnter={() => setShowIcon(true)}
-        onMouseLeave={() => setShowIcon(false)}
-        draggable="true"
+        onMouseEnter={() => setShowCancelIcon(true)}
+        onMouseLeave={() => setShowCancelIcon(false)}
       >
         <div className="todo-item">
           <figure
             className={`check-icon ${todoItem.checked && "checked-background"}`}
-            onClick={() => handleChecked(todoItem)}
+            onClick={() => handleToggleTodo(todoItem)}
           >
             {todoItem.checked && (
               <img src="images/icon-check.svg" alt="check icon" />
@@ -91,7 +112,8 @@ function TodoItem({ todoItem, todoList, onTodoList }) {
             {todoItem.text}
           </p>
         </div>
-        {showIcon && (
+
+        {showCancelIcon && (
           <figure
             className="cancel-icon"
             onClick={() => handleRemoveTodo(todoItem)}
@@ -102,15 +124,5 @@ function TodoItem({ todoItem, todoList, onTodoList }) {
       </div>
       <div className="line"></div>
     </>
-  );
-}
-
-function FilterButtons({ className, todoList }) {
-  return (
-    <div className={`filter-buttons ${className}`}>
-      <button>All</button>
-      <button>Active</button>
-      <button>Completed</button>
-    </div>
   );
 }

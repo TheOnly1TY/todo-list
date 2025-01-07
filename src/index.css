@@ -207,12 +207,12 @@ input[type="text"]::placeholder {
   cursor: pointer;
 }
 
-.filter-buttons button.active {
-  color: var(--bright-blue);
-}
-
 .filter-buttons button:hover {
   color: var(--TodoText-color);
+}
+
+.filter-buttons button.active {
+  color: var(--bright-blue);
 }
 
 .clear-list {

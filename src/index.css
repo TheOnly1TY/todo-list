@@ -237,10 +237,12 @@ input[type="text"]::placeholder {
   }
   .mobile {
     justify-content: center;
-    height: 3rem;
+
     font-size: 14px;
+    width: 100%;
+    height: 3rem;
     color: var(--Text-color);
-    background-color: var(--white);
+    background-color: var(--body-color);
     border-radius: 5px;
     box-shadow: var(--shadow);
   }

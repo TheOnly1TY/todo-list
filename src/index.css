@@ -67,10 +67,6 @@ header h1 {
   text-transform: uppercase;
 }
 
-.theme-switch-icon img {
-  cursor: pointer;
-}
-
 .todo-form {
   position: relative;
   display: flex;
@@ -85,7 +81,6 @@ header h1 {
   background-color: var(--body-color);
   border-radius: 50%;
   border: 1px solid var(--border-color);
-  cursor: pointer;
 }
 
 input {
@@ -151,7 +146,6 @@ input[type="text"]::placeholder {
   background-color: var(--body-color);
   border-radius: 50%;
   border: 1px solid var(--border-color);
-  cursor: pointer;
 }
 
 .checked-background {
@@ -176,7 +170,6 @@ input[type="text"]::placeholder {
 .cancel-icon {
   display: grid;
   place-content: center;
-  cursor: pointer;
 }
 .cancel-icon img {
   display: grid;
@@ -206,7 +199,6 @@ input[type="text"]::placeholder {
 .filter-buttons button {
   all: unset;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .filter-buttons button:hover {
@@ -219,7 +211,6 @@ input[type="text"]::placeholder {
 
 .clear-list {
   all: unset;
-  cursor: pointer;
 }
 .clear-list:hover {
   color: var(--TodoText-color);
@@ -265,6 +256,7 @@ input[type="text"]::placeholder {
   }
   .todo-form button {
     left: 1rem;
+    cursor: pointer;
   }
 
   input {
@@ -276,5 +268,13 @@ input[type="text"]::placeholder {
   }
   .mobile {
     display: none;
+  }
+
+  .theme-switch-icon img,
+  .filter-buttons button,
+  .check-icon,
+  .clear-list,
+  .cancel-icon {
+    cursor: pointer;
   }
 }

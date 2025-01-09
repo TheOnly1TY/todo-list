@@ -5,15 +5,15 @@
   --desktop-background-image: url(/public/images/bg-desktop-light.jpg);
   /* COLORS */
   /* color mode === hsl(hue, saturation, lightness) */
-  --bright-blue: #3a7cfd;
-  --Background-color: #fafafa;
-  --line-color: #e3e4f1;
-  --CompletedText-color: #d1d2da;
-  --Text-color: #9495a5;
-  --TodoText-color: #494c6b;
-  --inputText-color: #393a4b;
-  --body-color: #fff;
-  --border-color: #e3e4f1;
+  --bright-blue: hsl(220, 98%, 61%);
+  --Background-color: hsl(0, 0%, 98%);
+  --line-color: hsl(236, 33%, 92%);
+  --CompletedText-color: hsl(233, 11%, 84%);
+  --Text-color: hsl(236, 9%, 61%);
+  --TodoText-color: hsl(235, 19%, 35%);
+  --inputText-color: hsl(237, 14%, 26%);
+  --body-color: hsl(0, 0%, 100%);
+  --border-color: hsl(236, 33%, 92%);
 
   --shadow: 35px 50px -15px hsla(237, 20%, 80%, 0.5);
 
@@ -23,16 +23,16 @@
 [dark-theme="dark"] {
   --mobile-background-image: url(/public/images/bg-mobile-dark.jpg);
   --desktop-background-image: url(/public/images/bg-desktop-dark.jpg);
-  --bright-blue: #3a7cfd;
-  --Background-color: #171823;
-  --line-color: #393a4b;
-  --CompletedText-color: #4d5067;
-  --Text-color: #767992;
-  --TodoText-color: #c8cbe7;
-  --inputText-color: #c8cbe7;
-  --border-color: #393a4b;
+  --bright-blue: hsl(220, 98%, 61%);
+  --Background-color: hsl(235, 21%, 11%);
+  --line-color: hsl(237, 14%, 26%);
+  --CompletedText-color: hsl(233, 14%, 35%);
+  --Text-color: hsl(234, 11%, 52%);
+  --TodoText-color: hsl(234, 39%, 85%);
+  --inputText-color: hsl(234, 39%, 85%);
+  --border-color: hsl(237, 14%, 26%);
 
-  --body-color: #25273d;
+  --body-color: hsl(235, 24%, 19%);
 
   --shadow: 35px 50px -15px hsla(0, 0%, 0%, 0.5);
 
@@ -216,6 +216,7 @@ input[type="text"]::placeholder {
   color: var(--TodoText-color);
 }
 
+/* RESPONSIVENESS */
 @media (max-width: 500px) {
   body {
     background: var(--Background-color) var(--mobile-background-image);

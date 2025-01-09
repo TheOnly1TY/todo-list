@@ -163,7 +163,9 @@ input[type="text"]::placeholder {
   font-size: 18px;
   line-height: 24px;
   color: var(--TodoText-color);
-  word-break: break-all;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  word-break: normal;
   padding: 0 1rem;
 }
 .checked-text {
